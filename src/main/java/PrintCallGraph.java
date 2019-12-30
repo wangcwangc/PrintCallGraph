@@ -1,3 +1,7 @@
+import vo.JarVO;
+
+import java.util.Set;
+
 public class PrintCallGraph {
     public static void main(String[] args) {
         String classPaths = "/Applications/IntelliJ IDEA CE.app/Contents/lib/idea_rt.jar:" +
@@ -23,9 +27,35 @@ public class PrintCallGraph {
         String[] classpath = classPaths.split(":");
         int num = 0;
         for (String c : classpath) {
-            System.out.println(c);
+//            System.out.println(c);
             num++;
         }
-        System.out.println(num);
+//        System.out.println(num);
+        JarVO depJar = new JarVO("org.slf4j", "slf4j-api", "1.7.5");
+        JarVO depJar1 = new JarVO("org.slf4j", "slf4j-api", "1.7.29");
+//        List<String> classes = SootUtil.getJarClasses(depJar.getRepositoryJarPath());
+//
+//        for (String classsig : classes) {
+//            System.out.println(classsig);
+//        }
+
+//        for (Object key:System.getProperties().keySet()){
+//            System.out.println(System.getProperty((String)key));
+//        }
+
+//        System.out.println(depJar.getRepositoryJarPath());
+//        System.out.println(SootUtil.getJarClasses(depJar.getRepositoryJarPath()).size());
+//        Map<String, ClassVO> allClasses = depJar.getAllClass();
+//        for(String clsig: allClasses.keySet()){
+//           for (MethodVO m : allClasses.get(clsig).getMethods()){
+//               System.out.println(m.getMthdSig());
+//           }
+//        }
+        Set<String> commonMethods = depJar.getCommonMethods(depJar1.getallMethods());
+        for (String method : commonMethods) {
+            System.out.println(method);
+        }
+
+        System.out.println(System.getProperty("user.dir"));
     }
 }

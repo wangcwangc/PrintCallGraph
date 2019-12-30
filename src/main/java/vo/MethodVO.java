@@ -7,14 +7,14 @@ import java.util.Set;
 public class MethodVO {
     private String mthdSig;
     private Set<String> inMthds;
-    private neu.lab.conflict.vo.ClassVO cls;
+    private vo.ClassVO cls;
 
-    public MethodVO(String mthdSig, neu.lab.conflict.vo.ClassVO cls) {
+    public MethodVO(String mthdSig, vo.ClassVO cls) {
         this.mthdSig = mthdSig;
         inMthds = new HashSet<String>();
         this.cls = cls;
     }
-    public neu.lab.conflict.vo.ClassVO getClassVO() {
+    public vo.ClassVO getClassVO() {
         return cls;
     }
     public String getMthdSig() {

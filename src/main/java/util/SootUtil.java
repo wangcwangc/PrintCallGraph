@@ -57,6 +57,7 @@ public class SootUtil {
     public static String bytemthdSig2fullymethodName(String methodSig) {
         return methodSig.split(" ")[1].replaceAll(">", ""); // 返回值
     }
+
     /**
      * 获取类名，切分String 只留 类名
      *
@@ -105,12 +106,12 @@ public class SootUtil {
         return new ArrayList<String>();
     }
 
-//    public static Map<String, ClassVO> getClassTb(List<String> jarPaths) {
-//        Map<String, ClassVO> clsTb = new HashMap<String, ClassVO>();
-//        for (String clsSig : SootUtil.getJarsClasses(jarPaths)) {
-//            SootClass sootClass = Scene.v().getSootClass(clsSig);
-//            ClassVO clsVO = new ClassVO(sootClass.getName());
-//            clsTb.put(sootClass.getName(), clsVO);
+    public static Map<String, ClassVO> getClassTb(List<String> jarPaths) {
+        Map<String, ClassVO> clsTb = new HashMap<String, ClassVO>();
+        for (String clsSig : SootUtil.getJarsClasses(jarPaths)) {
+            SootClass sootClass = Scene.v().getSootClass(clsSig);
+            ClassVO clsVO = new ClassVO(sootClass.getName());
+            clsTb.put(sootClass.getName(), clsVO);
 //            if (Conf.ONLY_GET_SIMPLE) {// only add simple method in simple class 只添加简单类中的简单方法
 //                if (isSimpleCls(sootClass)) {
 //                    for (SootMethod sootMethod : sootClass.getMethods()) {
@@ -119,13 +120,13 @@ public class SootUtil {
 //                    }
 //                }
 //            } else {// add all method
-//                for (SootMethod sootMethod : sootClass.getMethods()) {
-//                    clsVO.addMethod(new MethodVO(sootMethod.getSignature(), clsVO));
-//                }
+            for (SootMethod sootMethod : sootClass.getMethods()) {
+                clsVO.addMethod(new MethodVO(sootMethod.getSignature(), clsVO));
+            }
 //            }
-//        }
-//        return clsTb;
-//    }
+        }
+        return clsTb;
+    }
 
     public static boolean isSimpleCls(SootClass sootClass) {
         for (SootMethod sootMethod : sootClass.getMethods()) {
