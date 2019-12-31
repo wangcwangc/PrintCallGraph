@@ -1,9 +1,6 @@
 package soot;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import soot.SceneTransformer;
 import soot.jimple.toolkits.callgraph.CHATransformer;
@@ -15,19 +12,14 @@ import soot.jimple.toolkits.callgraph.CHATransformer;
  */
 public abstract class CallGraphTF extends SceneTransformer {
 
-    // private DepJarJRisk depJarJRisk;
-    protected Set<String> entryClses; // 入口类集合
-    protected Set<String> conflictJarClses; // 冲突jar类集合
-    protected Set<String> usedJarClses; // 使用的jar类集合
-    protected Set<String> riskMthds; // 风险方法集合
-    protected Set<String> rchMthds;
+    protected String entryClass; // 入口类集合
+    protected Set<String> riskMethods; // 风险方法集合
     protected IGraph graph;
-    protected Map<String, Integer> mthd2branch;
-    protected Set<String> parentDepJarClasses;
 
-    public CallGraphTF() {
+    public CallGraphTF(String entryClass, Set<String> riskRethods) {
         super();
-//        entryClses = DepJars.i().getHostDepJar().getAllCls(true);
+        this.entryClass = entryClass;
+        this.riskMethods = riskRethods;
     }
 
 
@@ -53,12 +45,8 @@ public abstract class CallGraphTF extends SceneTransformer {
     protected abstract void formGraph();
 
     protected boolean isHostClass(String clsName) {
-        return entryClses.contains(clsName);
+        return entryClass.equals(clsName);
     }
-
-//	protected boolean isHostClassNoSameJar(String clsName) {
-//		return !LibCopyInfo.isLibCopy(MavenUtil.i().getProjectCor(), clsName);
-//	}
 
     public IGraph getGraph() {
         return graph;

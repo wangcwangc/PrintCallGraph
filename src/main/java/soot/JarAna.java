@@ -6,6 +6,7 @@ import java.util.List;
 import soot.PackManager;
 import soot.Transform;
 import util.SootUtil;
+import static soot.SootClass.HIERARCHY;
 
 public class JarAna extends SootAna {
     private static JarAna instance = new JarAna();
@@ -19,21 +20,19 @@ public class JarAna extends SootAna {
     }
 
     public IGraph getGraph(String[] jarFilePaths, CallGraphTF transformer) {
-//		MavenUtil.i().getLog().info("use soot to compute reach methods for " + depJarJRisk.toString());
         IGraph graph = null;
-        long start = System.currentTimeMillis();
         try {
 
             PackManager.v().getPack("wjtp").add(new Transform("wjtp.myTrans", transformer));
-
+            Scene.v().addBasicClass("com.google.common.base.Supplier",HIERARCHY);
             soot.Main.main(getArgs(jarFilePaths).toArray(new String[0]));
 
             graph = transformer.getGraph();
 
         } catch (Exception e) {
+            System.out.println("cg error : " + e);
         }
         soot.G.reset();
-        long runtime = (System.currentTimeMillis() - start) / 1000;
         return graph;
     }
 

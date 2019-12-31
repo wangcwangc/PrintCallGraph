@@ -33,14 +33,14 @@ public class Graph4Path implements IGraph {
     }
 
     private void addEdge(MethodCall call) {
-//        Node4Path src = name2node.get(call.getSrc());
-//        if (src != null) {
-//            src.addOutNd(call.getTgt());
-//            name2node.put(src.getName(), src);
-//        }
+        Node4Path src = name2node.get(call.getSrc());
+        if (src != null) {
+            src.addOutNd(call.getTgt());
+            name2node.put(src.getName(), src);
+        }
 
 //		if(name2node.get(call.getSrc()))
-        name2node.get(call.getSrc()).addOutNd(call.getTgt());
+//        name2node.get(call.getSrc()).addOutNd(call.getTgt());
 //		name2node.get(call.getTgt()).addInNd(call.getSrc());
     }
 
