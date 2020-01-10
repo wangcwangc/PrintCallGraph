@@ -14,9 +14,11 @@ public class MethodVO {
         inMthds = new HashSet<String>();
         this.cls = cls;
     }
+
     public vo.ClassVO getClassVO() {
         return cls;
     }
+
     public String getMthdSig() {
         return mthdSig;
     }
@@ -24,11 +26,13 @@ public class MethodVO {
     public void setMthdSig(String mthdSig) {
         this.mthdSig = mthdSig;
     }
+
     public void addInMthds(String mthdSig) {
         if (null == this.inMthds)
             inMthds = new HashSet<String>();
         inMthds.add(mthdSig);
     }
+
     public Set<String> getInMthds() {
         return inMthds;
     }
@@ -36,6 +40,7 @@ public class MethodVO {
     public void setInMthds(Set<String> inMthds) {
         this.inMthds = inMthds;
     }
+
     public boolean isSameName(String mthdSig2) {
         return mthdSig.equals(mthdSig2);
     }
@@ -56,4 +61,12 @@ public class MethodVO {
         return this.mthdSig.hashCode();
     }
 
+    @Override
+    public String toString() {
+        return "MethodVO{" +
+                "mthdSig='" + mthdSig + '\'' +
+                ", inMthds=" + inMthds +
+                ", cls=" + cls +
+                '}';
+    }
 }

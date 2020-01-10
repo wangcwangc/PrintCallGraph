@@ -3,11 +3,6 @@ package soot;
 import java.util.Arrays;
 import java.util.List;
 
-import soot.PackManager;
-import soot.Transform;
-import util.SootUtil;
-import static soot.SootClass.HIERARCHY;
-
 public class JarAna extends SootAna {
     private static JarAna instance = new JarAna();
 
@@ -24,7 +19,6 @@ public class JarAna extends SootAna {
         try {
 
             PackManager.v().getPack("wjtp").add(new Transform("wjtp.myTrans", transformer));
-            Scene.v().addBasicClass("com.google.common.base.Supplier",HIERARCHY);
             soot.Main.main(getArgs(jarFilePaths).toArray(new String[0]));
 
             graph = transformer.getGraph();

@@ -71,4 +71,11 @@ public class ClassVO {
         this.methods = mthds;
     }
 
+    @Override
+    public String toString() {
+        return "ClassVO{" +
+                "classSig='" + classSig + '\'' +
+                ", methods=" + methods +
+                '}';
+    }
 }
